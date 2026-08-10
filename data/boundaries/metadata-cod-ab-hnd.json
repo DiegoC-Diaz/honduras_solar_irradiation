@@ -1,0 +1,85 @@
+{
+    "id": "bd62fb53-64d3-478f-9ca8-38e4a2de19c0",
+    "title": "Honduras - Subnational Administrative Boundaries",
+    "name": "cod-ab-hnd",
+    "notes": "Honduras administrative level 0-2 boundaries (COD-AB) dataset version 01.    This dataset is structured into 2 levels: - Admin 1: 18  - Admin 2: 298     Dates associated with this dataset: - 30 October 2025: dataset reviewed for accuracy and completeness - 05 October 2016: valid for use by the humanitarian community - 25 June 2015: last edit to the dataset before publishing - 25 June 2015: boundaries created by the source    Contributed by <a href=\"https://data.humdata.org/organization/ocha-rolac\">OCHA Latin America and the Caribbean (ROLAC)</a>. Quality assured, configured, and published by <a href=\"https://data.humdata.org/organization/ocha-fiss\">OCHA Field Information Services (FIS)</a> and <a href=\"https://data.humdata.org/organization/hdx\">HDX</a>.    Part of the dataset: <a href=\"https://data.humdata.org/dataset/cod-ab-global\">Global Subnational Administrative Boundaries</a>",
+    "dataset_source": "Sistema Nacional de Informaci\u00f3n Territorial (SINIT), Secretaria T\u00e9cnica de Planificaci\u00f3n y Cooperaci\u00f3n Externa (SEPLAN), 2010",
+    "organization": "OCHA Field Information Services Section (FISS)",
+    "dataset_date": "[2016-10-05T00:00:00 TO 2025-10-30T23:59:59]",
+    "last_modified": "2026-01-26T15:40:06.608960",
+    "data_update_frequency": "Every year",
+    "groups": [
+        "Honduras"
+    ],
+    "license_title": "Creative Commons Attribution for Intergovernmental Organisations (CC BY-IGO)",
+    "methodology": "Other",
+    "methodology_other": "Dataset: Other  \n  \nP-codes: nan",
+    "caveats": "Administrative level 3:  37 of the 3,730 ADM3 features (in  parts of Gracias and Dios and Santa Barbara departments) have incorrect or partly incorrect parent attribute data and boundaries.   ALL existing P-codes in the layer are unique and usable but are not fully compatible with administrative level 0-2.",
+    "tags": [
+        "administrative boundaries-divisions",
+        "gazetteer",
+        "geodata"
+    ],
+    "resources": [
+        {
+            "created": "2025-12-18T16:59:18.138717",
+            "description": "Honduras administrative level 0-2 boundaries (COD-AB), Geodatabase",
+            "format": "Geodatabase",
+            "download_url": "https://data.humdata.org/dataset/bd62fb53-64d3-478f-9ca8-38e4a2de19c0/resource/d8e6f599-ec8f-4046-82e6-a53b9ac232ea/download/hnd_admin_boundaries.gdb.zip",
+            "id": "d8e6f599-ec8f-4046-82e6-a53b9ac232ea",
+            "last_modified": "2026-01-26T15:40:05.326549",
+            "metadata_modified": "2026-03-10T09:03:23.299337",
+            "microdata": false,
+            "dataset_id": "bd62fb53-64d3-478f-9ca8-38e4a2de19c0",
+            "resource_type": "file.upload",
+            "name": "hnd_admin_boundaries.gdb.zip",
+            "mimetype": "application/zip",
+            "size": "28.4M"
+        },
+        {
+            "created": "2025-12-18T16:59:18.138721",
+            "description": "Honduras administrative level 0-2 boundaries (COD-AB), SHP",
+            "format": "SHP",
+            "download_url": "https://data.humdata.org/dataset/bd62fb53-64d3-478f-9ca8-38e4a2de19c0/resource/4b3848a6-cbc3-406d-9640-13757d412b25/download/hnd_admin_boundaries.shp.zip",
+            "id": "4b3848a6-cbc3-406d-9640-13757d412b25",
+            "last_modified": "2026-01-26T15:40:05.763058",
+            "metadata_modified": "2026-03-10T09:03:23.299446",
+            "microdata": false,
+            "dataset_id": "bd62fb53-64d3-478f-9ca8-38e4a2de19c0",
+            "resource_type": "file.upload",
+            "name": "hnd_admin_boundaries.shp.zip",
+            "mimetype": "application/zip",
+            "size": "65.4M"
+        },
+        {
+            "created": "2025-12-18T16:59:18.138723",
+            "description": "Honduras administrative level 0-2 boundaries (COD-AB), GeoJSON",
+            "format": "GeoJSON",
+            "download_url": "https://data.humdata.org/dataset/bd62fb53-64d3-478f-9ca8-38e4a2de19c0/resource/2425575d-6808-45f3-90cb-55557a5d234b/download/hnd_admin_boundaries.geojson.zip",
+            "id": "2425575d-6808-45f3-90cb-55557a5d234b",
+            "last_modified": "2026-01-26T15:40:06.063318",
+            "metadata_modified": "2026-03-10T09:03:23.299533",
+            "microdata": false,
+            "dataset_id": "bd62fb53-64d3-478f-9ca8-38e4a2de19c0",
+            "resource_type": "file.upload",
+            "name": "hnd_admin_boundaries.geojson.zip",
+            "mimetype": "application/zip",
+            "size": "75.6M"
+        },
+        {
+            "created": "2025-12-18T16:59:18.138726",
+            "description": "Honduras administrative level 0-2 boundaries (COD-AB), XLSX",
+            "format": "XLSX",
+            "download_url": "https://data.humdata.org/dataset/bd62fb53-64d3-478f-9ca8-38e4a2de19c0/resource/f12349c7-bc5f-4655-a34d-972f761266b5/download/hnd_admin_boundaries.xlsx",
+            "id": "f12349c7-bc5f-4655-a34d-972f761266b5",
+            "last_modified": "2026-01-26T15:40:06.608960",
+            "metadata_modified": "2026-03-10T09:03:23.299606",
+            "microdata": false,
+            "dataset_id": "bd62fb53-64d3-478f-9ca8-38e4a2de19c0",
+            "resource_type": "file.upload",
+            "name": "hnd_admin_boundaries.xlsx",
+            "mimetype": null,
+            "size": "1.6M"
+        }
+    ]
+}
