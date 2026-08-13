@@ -1,3 +1,7 @@
 .output
 data/
 .ICAE_Municipal
+.DS_Store
+__pycache__/
+*.sh
+.ipynb_checkpoints/
