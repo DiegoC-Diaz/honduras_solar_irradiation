@@ -80,6 +80,9 @@ Para la guía detallada de la secuencia metodológica, consulte [`notebooks/READ
 
 ---
 
+## Datos:
+Archivo .zip
+
 ## 🛠️ Módulos Utilitarios (`utils/`)
 
 | Módulo | Funcionalidad Principal |
