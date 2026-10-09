@@ -6,7 +6,9 @@
 
 A data science project that evaluates solar energy potential and electricity access in **Cortés, Honduras**, aligned with **UN Sustainable Development Goal 7 (Affordable and Clean Energy)**. It combines public energy, emissions, climate, and socioeconomic data to identify where a solar project would have the greatest impact and to size a solar-plus-storage system for unserved households.
 
-📊 **[Interactive dashboard (Looker Studio)](https://datastudio.google.com/reporting/ff6dd1ce-6f23-4838-bf32-3a1661a6d0dc)**
+📊 **[Interactive dashboard (Looker Studio)](https://datastudio.google.com/reporting/a80ef7c7-2e7c-4c84-93f3-52faba73be21)**
+
+Note: You may need a google account to look at the data due to Data Studio Limitations.![alt text](<Screenshot 2026-10-09 at 14.06.22.png>) ![alt text](<Screenshot 2026-10-09 at 14.05.49.png>)
 
 ![Dashboard preview](outputs/dashboard_preview.png)
 <!-- Add a screenshot of the Looker Studio dashboard here -->
