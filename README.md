@@ -10,7 +10,10 @@ A data science project that evaluates solar energy potential and electricity acc
 
 Note: You may need a google account to look at the data due to Data Studio Limitations.![alt text](<Screenshot 2026-10-09 at 14.06.22.png>) ![alt text](<Screenshot 2026-10-09 at 14.05.49.png>)
 
-![Dashboard preview](outputs/dashboard_preview.png)
+![Dashboard preview](outputs/idh_ips.png)
+![Dashboard preview](outputs/ips.png)
+![Dashboard preview](outputs/perfiles_municipales_ips.png)
+![Dashboard preview](outputs/media_co2.png)
 <!-- Add a screenshot of the Looker Studio dashboard here -->
 
 ---
@@ -21,11 +24,11 @@ Note: You may need a google account to look at the data due to Data Studio Limit
 - **Proposed system:** 31.29 MWp PV (bifacial modules) with a 25 MW / 100 MWh battery (4-hour discharge at the evening peak), generating an estimated **49.75 GWh/year**.
 - **Solar potential:** average PVOUT of **1,589.81 kWh/kWp/year** across the target area.
 - **Municipal prioritization:** a Solar Prioritization Index (IPS) ranks the 12 municipalities of Cortés. **Potrerillos** and **Pimienta** show good infrastructure and low climate risk, making them strong candidates for initial projects.
-- **Emissions context:** EDGAR-based estimates indicate an average of ~7,155 t CO₂/month in Choloma and ~4,278 t CO₂/month in San Pedro Sula.
+- **Power Issues**: The analysis concluded the the country a has high potential for solar power but lacks of the required BLESS Infraestructure for high capacity energy storage. This according to Time Series analysis of Energy Production by source and CND statements. 
 
 ## Problem
 
-Cortés has one of the highest levels of CO₂ emissions in Honduras, and demand for electricity keeps growing with GDP. Many households remain without grid access, often relying on firewood, charcoal, or kerosene, which causes indoor air pollution and health risks. The project asks: **where should a solar project be built first, and how large should it be to serve unelectrified households reliably?**
+Cortés has one of the highest levels of CO₂ emissions in Honduras, and demand for electricity keeps growing with GDP (known as PIB in spanish). Many households remain without grid access, often relying on firewood, charcoal, or kerosene, which causes indoor air pollution and health risks. The project asks: **where should a solar project be built first, and how large should it be to serve unelectrified households reliably?**
 
 ## Methodology
 
