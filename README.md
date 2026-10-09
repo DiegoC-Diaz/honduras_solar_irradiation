@@ -1,123 +1,118 @@
-# ☀️ Honduras Solar Irradiation & Energy Access (ODS 7)
+# ☀️ Honduras Solar Potential & Energy Access (SDG 7)
 
-Este repositorio contiene las herramientas de procesamiento de datos, scripts utilitarios, capas geospaciales y cuadernos de análisis enfocados en la evaluación del potencial de irradiación solar, descarbonización de la matriz eléctrica, y el **Índice de Cobertura y Acceso a Energía Eléctrica en Honduras (ICAEH)**, en el marco del **Objetivo de Desarrollo Sostenible 7 (ODS 7: Energía Asequible y No Contaminante)** de las Naciones Unidas.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![Looker Studio](https://img.shields.io/badge/Looker%20Studio-Dashboard-orange)
+![Status](https://img.shields.io/badge/status-completed-brightgreen)
+
+A data science project that evaluates solar energy potential and electricity access in **Cortés, Honduras**, aligned with **UN Sustainable Development Goal 7 (Affordable and Clean Energy)**. It combines public energy, emissions, climate, and socioeconomic data to identify where a solar project would have the greatest impact and to size a solar-plus-storage system for unserved households.
+
+📊 **[Interactive dashboard (Looker Studio)](https://datastudio.google.com/reporting/ff6dd1ce-6f23-4838-bf32-3a1661a6d0dc)**
+
+![Dashboard preview](outputs/dashboard_preview.png)
+<!-- Add a screenshot of the Looker Studio dashboard here -->
 
 ---
 
-## 📁 Estructura del Proyecto
+## Key Results
 
-```text
-ods-7/
-├── data/                                         # Datasets crudos, procesados y metadatos (Ver data/README.md)
-│   ├── EPHM/                                     # Encuesta Permanente de Hogares de Propósitos Múltiples (INE)
-│   ├── Edgar/                                    # Emisiones NetCDF mensuales de CO2 sector energía (EDGAR JRC)
-│   ├── GIS_Data_SolarPower/                      # Capas raster GeoTIFF y AAIGRID (Global Solar Atlas v2)
-│   ├── ICAEH/                                    # Informes y tablas de cobertura eléctrica municipal (SEN / ENEE)
-│   ├── air_quality/                              # Series horarias de calidad del aire y clima (Open-Meteo / CAMS)
-│   ├── boundaries/                               # Límites administrativos de Honduras en GDB y GeoJSON (OCHA HDX)
-│   ├── chile_urban/                              # Benchmark comparativo: Solar, renovables y urbanización en Chile
-│   ├── crn_plan_expansion/                       # Anexos generación CREE y series históricas del PIB (Banco Mundial)
-│   ├── gbif/                                     # Registros de ocurrencia de biodiversidad (API GBIF)
-│   ├── index/                                    # Modelo INFORM Honduras y Preselección Solar Territorial (IPS)
-│   ├── nasa_power/                               # Series de radiación solar y meteorología puntual (NASA POWER)
-│   ├── owid_ember/                               # Histórico de generación eléctrica por fuente (OWID / Ember)
-│   ├── perfil_municipal_cortes/                  # Indicadores IDH, IDS y sociodemográficos de Cortés (PNUD / INE)
-│   ├── poblacion_anual_honduras/                 # Serie histórica de población nacional (Banco Mundial WDI)
-│   ├── sen_despacho_energia/                     # Despacho horario por tecnología y demanda residencial (CND / ODS)
-│   ├── temperature/                              # Serie mensual de temperatura máxima 1901-2025 (CRU TS v4.10)
-│   └── README.md                                 # Catálogo Maestro y Diccionario de Datos del proyecto
-├── notebooks/                                    # Cuadernos Jupyter para modelado y análisis de datos (Ver notebooks/README.md)
-│   ├── 01_cobertura_electrica_icaeh.ipynb        # Análisis Exploratorio (EDA) de Cobertura Eléctrica (ICAEH)
-│   ├── 02_generacion_despacho_electrico_honduras.ipynb # Despacho horario y matriz de generación eléctrica (CND / ENEE)
-│   ├── 03_diagnostico_solar_municipal_cortes.ipynb # Diagnóstico de Irradiación (GHI/PVOUT) en municipios de Cortés
-│   ├── 04_pronostico_demanda_pib_poblacion.ipynb # Modelado econométrico de demanda residencial vs. PIB y población
-│   ├── 05_vulnerabilidad_social_cortes.ipynb     # Evaluación de vulnerabilidad social, IDH, IDS y NBI en Cortés
-│   ├── 06_indicadores_riesgo_inform_honduras.ipynb # Procesamiento de indicadores de riesgo subnacional INFORM
-│   ├── 07_indice_priorizacion_solar_ips_cortes.ipynb # Formulación del Índice de Priorización Solar (IPS) en Cortés
-│   ├── 08_emisiones_co2_sector_electrico.ipynb   # Procesamiento de grillas raster NetCDF de emisiones EDGAR
-│   ├── 09_benchmark_chile_solar_urbanizacion.ipynb # Estudio comparativo internacional: Transición solar en Chile
-│   ├── drafts/                                   # Cuadernos preliminares y pruebas de concepto archivadas
-│   │   ├── gda_preliminar.ipynb
-│   │   ├── indice_preliminar.ipynb
-│   │   └── gbif_preliminar.ipynb
-│   ├── media/                                    # Gráficos y figuras exportadas para los cuadernos
-│   └── README.md                                 # Guía metodológica y flujo de ejecución de cuadernos
-├── outputs/                                      # Figuras, mapas y datasets de salida generados
-│   ├── heatmap_correlacion_cortes.png            # Matriz de correlación de variables socioeconómicas y climáticas
-│   ├── idh_vs_ips_scatter_cortes.png             # Dispersión IDH vs. Índice de Priorización Solar
-│   ├── ivs_ranking_cortes.png                    # Ranking de Vulnerabilidad Social en Cortés
-│   ├── ivs_vs_ips_scatter_cortes.png             # Comparativa de Vulnerabilidad Social vs. Priorización Solar
-│   ├── perfil_dimensiones_vulnerabilidad.png     # Gráfico de barras de dimensiones de vulnerabilidad
-│   ├── vulnerabilidad_social_cortes.csv          # Tabla consolidada del índice de vulnerabilidad social
-│   └── municipios_prioritarios_cortes.csv        # Municipios seleccionados para despliegue prioritario
-├── utils/                                        # Módulos Python reutilizables de extracción y procesamiento
-│   ├── airquality.py                             # Cliente API para Open-Meteo Air Quality y clima horario
-│   ├── edgar_process.py                          # Extracción de estadísticas zonales desde rasters NetCDF de EDGAR
-│   ├── extra_table.py                            # Extracción y estructuración de tablas PDF con Camelot
-│   ├── gbif_process.py                           # Cliente de consulta y paginación para la API de GBIF
-│   └── pdf_process.py                            # Extracción automatizada de páginas de informes PDF con PyPDF
-├── .gitignore                                    # Exclusiones de control de versiones (datos pesados, cache)
-└── README.md                                     # Documentación principal del repositorio
+- **25,124 households** in Cortés without electricity access (ICAEH 2024 report).
+- **Proposed system:** 31.29 MWp PV (bifacial modules) with a 25 MW / 100 MWh battery (4-hour discharge at the evening peak), generating an estimated **49.75 GWh/year**.
+- **Solar potential:** average PVOUT of **1,589.81 kWh/kWp/year** across the target area.
+- **Municipal prioritization:** a Solar Prioritization Index (IPS) ranks the 12 municipalities of Cortés. **Potrerillos** and **Pimienta** show good infrastructure and low climate risk, making them strong candidates for initial projects.
+- **Emissions context:** EDGAR-based estimates indicate an average of ~7,155 t CO₂/month in Choloma and ~4,278 t CO₂/month in San Pedro Sula.
+
+## Problem
+
+Cortés has one of the highest levels of CO₂ emissions in Honduras, and demand for electricity keeps growing with GDP. Many households remain without grid access, often relying on firewood, charcoal, or kerosene, which causes indoor air pollution and health risks. The project asks: **where should a solar project be built first, and how large should it be to serve unelectrified households reliably?**
+
+## Methodology
+
+1. **Data collection:** Gathered 16 public datasets covering electricity coverage (ICAEH), national dispatch (CND), emissions (EDGAR), solar resource (Global Solar Atlas, NASA POWER), demographics and development (UNDP, UNAH, World Bank), and climate risk (INFORM).
+2. **Cleaning and extraction:** Extracted tables from government PDF reports (Camelot, pypdf), processed NetCDF emission grids, and computed zonal statistics per municipality.
+3. **Spatial analysis:** Intersected raster layers with administrative boundaries (GDB/GeoJSON) to calculate solar potential per municipality.
+4. **Modeling:** Forecast of residential electricity demand versus GDP and population (2024–2040).
+5. **Prioritization:** Built a multi-criteria **IPS** that weights solar potential, climate safety, grid infrastructure, and adaptive capacity, then compared it with social vulnerability and HDI rankings.
+6. **System sizing:** Sized PV capacity and storage from household demand (167 kWh/month per home), the PV capacity factor, and the evening peak (19:00 h).
+7. **Visualization:** Published the results as a Looker Studio dashboard.
+
+## Notebooks
+
+| # | Notebook | Purpose |
+|---|---|---|
+| 01 | `01_cobertura_electrica_icaeh.ipynb` | Exploratory analysis of electricity coverage; flags municipalities below 50% coverage |
+| 02 | `02_generacion_despacho_electrico_honduras.ipynb` | Hourly dispatch and generation mix; seasonality and daily demand curve |
+| 03 | `03_diagnostico_solar_municipal_cortes.ipynb` | Solar diagnostic (GHI, PVOUT) for the 12 municipalities of Cortés |
+| 04 | `04_pronostico_demanda_pib_poblacion.ipynb` | Residential demand forecast based on GDP and population |
+| 05 | `05_vulnerabilidad_social_cortes.ipynb` | Social vulnerability (HDI, IDS, NBI) at municipal level |
+| 06 | `06_indicadores_riesgo_inform_honduras.ipynb` | Subnational INFORM risk indicators |
+| 07 | `07_indice_priorizacion_solar_ips_cortes.ipynb` | Construction of the Solar Prioritization Index (IPS) |
+| 08 | `08_emisiones_co2_sector_electrico.ipynb` | Power-sector CO₂ emissions from EDGAR NetCDF grids |
+| 09 | `09_benchmark_chile_solar_urbanizacion.ipynb` | International benchmark: solar adoption and urbanization in Chile |
+
+## Key Findings
+
+- **Prioritization:** [Add 2–3 specific findings from notebook 07, e.g., top 3 municipalities and their IPS scores]
+- **Demand vs. supply:** At 167 kWh/month per household, 25,124 homes need ~50 GWh/year, which matches the PV output of the proposed plant.
+- **Energy mix:** Renewables supplied 55.4% of Honduras' 12.48 TWh net generation in 2024 (CND).
+
+## Limitations
+
+- EDGAR emissions are modeled estimates, not ground measurements.
+- The PV capacity factor used by CND for small projects (0.12) differs from the site-specific PVOUT-based estimate; the report uses site-specific values.
+- Household demand is an average (167 kWh/month) and does not reflect income or usage differences.
+- Socioeconomic indicators are municipal averages and may hide differences within each municipality.
+
+## Tech Stack
+
+**Languages & analysis:** Python, pandas, NumPy
+**Geospatial:** GeoPandas, Rasterio, rioxarray, Shapely, rasterstats, NetCDF4
+**Visualization:** Matplotlib, Seaborn, Looker Studio
+**Data extraction:** Camelot, pypdf, requests (REST APIs: Open-Meteo, GBIF)
+
+## Repository Structure
+
+```
+honduras_solar_irradiation/
+├── notebooks/     # Analysis notebooks (01–09) and drafts
+├── utils/         # Reusable Python modules for extraction and processing
+├── outputs/       # Figures, maps, and final tables (e.g., municipios_prioritarios_cortes.csv)
+├── data/          # Raw and processed data (see Data section)
+└── README.md
 ```
 
----
+## Data
 
-## 📓 Cuadernos de Análisis (`notebooks/`)
+Raw data is not included in this repository because of file size. [Add the download link: Google Drive / Zenodo / .zip file]. Each dataset's source and license are documented in `data/README.md`.
 
-Para la guía detallada de la secuencia metodológica, consulte [`notebooks/README.md`](file:///Users/diegocarcamo/Documents/ods-7/notebooks/README.md).
-
-| # | Cuaderno | Descripción y Objetivo Analítico |
-| :---: | :--- | :--- |
-| **01** | [`notebooks/01_cobertura_electrica_icaeh.ipynb`](file:///Users/diegocarcamo/Documents/ods-7/notebooks/01_cobertura_electrica_icaeh.ipynb) | **Análisis Exploratorio del ICAEH:** Diagnóstico de las brechas de cobertura eléctrica a nivel municipal y departamental en Honduras. Identifica municipios en rezago crítico (< 50% de cobertura) para priorización de proyectos autónomos. |
-| **02** | [`notebooks/02_generacion_despacho_electrico_honduras.ipynb`](file:///Users/diegocarcamo/Documents/ods-7/notebooks/02_generacion_despacho_electrico_honduras.ipynb) | **Matriz Energética y Despacho:** Análisis horario del despacho eléctrico del CND/ENEE, estacionalidad de fuentes renovables (solar, hidro, eólica, biomasa) y variabilidad diurna de la curva de demanda. |
-| **03** | [`notebooks/03_diagnostico_solar_municipal_cortes.ipynb`](file:///Users/diegocarcamo/Documents/ods-7/notebooks/03_diagnostico_solar_municipal_cortes.ipynb) | **Diagnóstico Solar Municipal (Cortés):** Procesamiento de capas raster del Global Solar Atlas (GHI, PVOUT), intersección espacial con geometrías administrativas (GDB) y cálculo de potencial fotovoltaico en los 12 municipios. |
-| **04** | [`notebooks/04_pronostico_demanda_pib_poblacion.ipynb`](file:///Users/diegocarcamo/Documents/ods-7/notebooks/04_pronostico_demanda_pib_poblacion.ipynb) | **Proyección Econométrica de Demanda:** Modelado de la elasticidad de la demanda eléctrica residencial en función del crecimiento del PIB constante y la evolución demográfica del Banco Mundial. |
-| **05** | [`notebooks/05_vulnerabilidad_social_cortes.ipynb`](file:///Users/diegocarcamo/Documents/ods-7/notebooks/05_vulnerabilidad_social_cortes.ipynb) | **Vulnerabilidad Social y Pobreza Multidimensional:** Integración de la EPHPM, IDH, IDS y NBI a escala municipal para identificar sectores con mayor necesidad de acceso energético subsidiado o comunitario. |
-| **06** | [`notebooks/06_indicadores_riesgo_inform_honduras.ipynb`](file:///Users/diegocarcamo/Documents/ods-7/notebooks/06_indicadores_riesgo_inform_honduras.ipynb) | **Riesgo y Capacidad de Afrontamiento:** Depuración y análisis del modelo subnacional INFORM para Honduras (amenazas climáticas, vulnerabilidad socioeconómica y falta de infraestructura). |
-| **07** | [`notebooks/07_indice_priorizacion_solar_ips_cortes.ipynb`](file:///Users/diegocarcamo/Documents/ods-7/notebooks/07_indice_priorizacion_solar_ips_cortes.ipynb) | **Índice de Priorización Solar (IPS):** Formulación multicriterio que pondera potencial solar, seguridad climática, infraestructura de red y capacidad adaptativa para priorizar municipios receptores en Cortés. |
-| **08** | [`notebooks/08_emisiones_co2_sector_electrico.ipynb`](file:///Users/diegocarcamo/Documents/ods-7/notebooks/08_emisiones_co2_sector_electrico.ipynb) | **Emisiones del Sector Eléctrico:** Procesamiento espacial de las grillas globales NetCDF de EDGAR v8 para cuantificar las emisiones locales de dióxido de carbono por generación termoeléctrica. |
-| **09** | [`notebooks/09_benchmark_chile_solar_urbanizacion.ipynb`](file:///Users/diegocarcamo/Documents/ods-7/notebooks/09_benchmark_chile_solar_urbanizacion.ipynb) | **Benchmark Regional (Chile):** Estudio empírico de la curva de adopción fotovoltaica a gran escala en Chile y su relación con la urbanización, como lección aprendida para la política energética de Honduras. |
-
----
-
-## Datos:
-Archivo .zip
-
-## 🛠️ Módulos Utilitarios (`utils/`)
-
-| Módulo | Funcionalidad Principal |
-| :--- | :--- |
-| [`utils/airquality.py`](file:///Users/diegocarcamo/Documents/ods-7/utils/airquality.py) | Consulta automatizada por lotes a la API abierta de Open-Meteo para extraer contaminantes atmosféricos (PM2.5, PM10, CO, NO2, O3, AQI) y meteorología complementaria de los municipios de Cortés. |
-| [`utils/edgar_process.py`](file:///Users/diegocarcamo/Documents/ods-7/utils/edgar_process.py) | Pipeline de procesamiento zonal de alto rendimiento para archivos NetCDF (.nc) de EDGAR. Optimiza la memoria RAM mediante recorte espacial de geometrías municipales hondureñas y escritura incremental a CSV. |
-| [`utils/gbif_process.py`](file:///Users/diegocarcamo/Documents/ods-7/utils/gbif_process.py) | Extracción de ocurrencias de biodiversidad desde la API REST de GBIF mediante polígonos espaciales WKT, gestionando paginación automática y exportación estructurada. |
-| [`utils/extra_table.py`](file:///Users/diegocarcamo/Documents/ods-7/utils/extra_table.py) | Extracción automatizada de matrices y tablas tabulares complejas incrustadas en informes PDF del sector energético mediante `camelot-py`. |
-| [`utils/pdf_process.py`](file:///Users/diegocarcamo/Documents/ods-7/utils/pdf_process.py) | Utilidad con `pypdf` para extraer y ensamblar rangos específicos de páginas de informes gubernamentales voluminosos. |
-
----
-
-## 📊 Catálogo de Datos (`data/`)
-
-Para consultar el inventario detallado de los 16 conjuntos de datos, sus fuentes oficiales, licencias de uso, periodicidades y diccionarios de variables, consulte el **[Catálogo Maestro de Datos (`data/README.md`)](file:///Users/diegocarcamo/Documents/ods-7/data/README.md)**.
-
----
-
-## 🚀 Requisitos e Instalación
-
-Se recomienda utilizar un entorno Python 3.10+ (preferiblemente vía Conda / Miniforge para dependencias geoespaciales y NetCDF):
+## How to Run
 
 ```bash
-# Crear y activar entorno virtual
+# Create the environment (conda recommended for geospatial dependencies)
 conda create -n ods7 python=3.10 -y
 conda activate ods7
 
-# Dependencias geoespaciales, raster y NetCDF
+# Geospatial and NetCDF dependencies
 conda install -c conda-forge geopandas rasterio rioxarray netcdf4 rasterstats shapely -y
 
-# Dependencias de análisis y visualización
-pip install pandas numpy matplotlib seaborn requests pypdf camelot-py[cv] openpyxl
+# Analysis and visualization
+pip install pandas numpy matplotlib seaborn requests pypdf "camelot-py[cv]" openpyxl
 ```
 
----
+Then download the data, place it in `data/`, and run the notebooks in order (01 → 09).
 
-## 📜 Licencia y Créditos
-Proyecto desarrollado para el análisis de desarrollo sostenible, transición energética e irradiación solar en Honduras (ODS 7). Consulte la licencia específica de cada conjunto de datos en su respectiva carpeta.
+## Skills Demonstrated
+
+- Data cleaning and integration from heterogeneous sources (PDF, NetCDF, GeoTIFF, APIs, CSV)
+- Geospatial analysis and zonal statistics
+- Multi-criteria index design and municipal prioritization
+- Time-series and econometric demand forecasting
+- Dashboard design and data storytelling
+
+## Author
+
+**Diego Carcamo**: Data science student (UNITEC San Pedro Sula)
+📧 diegofdiaz1717@outlook.com · 💼 [LinkedIn](https://www.linkedin.com/in/diego-carcamo-20396430a) · 🐙 [GitHub](https://github.com/DiegoC-Diaz)
+
+## License
+
+Code is released under [MIT / choose a license]. Each dataset is subject to its original source license (see `data/README.md`).
